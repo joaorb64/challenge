@@ -1,11 +1,10 @@
-import React from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
-import logo from './logo.svg'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import { CountryList } from './pages/CountryList/CountryList'
 import { CountryDetail } from './pages/CountryDetail/CountryDetail'
 import { PageHeader } from './shared/components/PageHeader/PageHeader'
-import { AppContext, AppContextProvider } from './shared/context/AppContext'
+import { AppContextProvider } from './shared/context/AppContext'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 function App() {
   return (

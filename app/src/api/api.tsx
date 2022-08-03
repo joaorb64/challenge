@@ -4,11 +4,11 @@ import { Country, CountryFilter } from '../shared/types/types'
 export const getCountries = async (filter: CountryFilter | undefined): Promise<[Country] | []> => {
   const BASE_URL = filter && filter.name ? '/name/' + filter.name : '/all'
 
-  let { data } = await axios.get(process.env.REACT_APP_API + BASE_URL)
+  const { data } = await axios.get(process.env.REACT_APP_API + BASE_URL)
 
   if (data && filter?.region) {
-    data = data.filter((e: Country) => {
-      return e.region == filter.region
+    return data.filter((e: Country) => {
+      return e.region === filter.region
     })
   }
 

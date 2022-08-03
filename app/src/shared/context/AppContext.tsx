@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useState } from 'react'
+import React, { createContext, PropsWithChildren, useMemo, useState } from 'react'
 
 interface IAppContext {
   search?: string | undefined
@@ -15,17 +15,14 @@ export const AppContext = createContext<IAppContext>({
 export const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const [search, setSearch] = useState<string | undefined>(undefined)
   const [selectedRegion, setSelectedRegion] = useState<string | undefined>(undefined)
+  const value = useMemo(() => {
+    return {
+      search: search,
+      setSearch: setSearch,
+      selectedRegion: selectedRegion,
+      setSelectedRegion: setSelectedRegion
+    }
+  }, [search, selectedRegion])
 
-  return (
-    // this is the provider providing state
-    <AppContext.Provider
-      value={{
-        search: search,
-        setSearch: setSearch,
-        selectedRegion: selectedRegion,
-        setSelectedRegion: setSelectedRegion
-      }}>
-      {children}
-    </AppContext.Provider>
-  )
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
